@@ -110,7 +110,7 @@ public class PostgreSQLDataTypesIT extends SourceDbToSpannerITBase {
         List.of(
             // "t_bigint_array_to_int64_array",
             "t_bigint_array_to_string",
-            // "t_bit_to_bool_array",
+            "t_bit_to_bool_array",
             // "t_bit_varying_to_bool_array",
             // "t_bool_array_to_bool_array",
             "t_bool_array_to_string",
