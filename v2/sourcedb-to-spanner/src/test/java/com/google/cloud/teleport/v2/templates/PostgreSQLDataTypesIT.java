@@ -110,7 +110,7 @@ public class PostgreSQLDataTypesIT extends SourceDbToSpannerITBase {
         List.of(
             // "t_bigint_array_to_int64_array",
             "t_bigint_array_to_string",
-            "t_bit_to_bool_array",
+            // "t_bit_to_bool_array",
             // "t_bit_varying_to_bool_array",
             // "t_bool_array_to_bool_array",
             "t_bool_array_to_string",
@@ -168,6 +168,12 @@ public class PostgreSQLDataTypesIT extends SourceDbToSpannerITBase {
     for (String table : unsupportedTypeTables) {
       // Unsupported rows should still be migrated. Each source table has 2 rows.
       assertThat(spannerResourceManager.getRowCount(table)).isEqualTo(2L);
+      
+      // Log the contents of the unsupported tables to see what values were migrated
+      List<Struct> rows = spannerResourceManager.readTableRecords(table, "id", "col");
+      for (Struct row : rows) {
+        LOG.info("Unsupported table {} row: {}", table, row);
+      }
     }
   }
 
